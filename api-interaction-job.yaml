@@ -1,0 +1,95 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: api-interaction-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: api-interaction
+        image: node:14
+        command: ["sh", "-c", "mkdir -p /tmp/scripts && cp /scripts/* /tmp/scripts && cd /tmp/scripts && npm install && node api-script.js"]
+        volumeMounts:
+        - name: script-volume
+          mountPath: /scripts
+      restartPolicy: Never
+      volumes:
+      - name: script-volume
+        configMap:
+          name: api-script-config
+  backoffLimit: 4
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-script-config
+data:
+  api-script.js: |
+    import fetch from 'node-fetch';
+    import fs from 'fs';
+    import { createObjectCsvWriter } from 'csv-writer';
+
+    async function createPost() {
+      await fetch('http://server:5050/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          body: `We the People of the United States, in Order to form a more perfect Union...`,
+          permalink: 'jNsgObovWyKEoXNydtis',
+          author: 'marwan',
+          title: 'US Constitution',
+          tags: [
+            'brow',
+            'mall',
+            'net',
+            'specialist',
+            'balloon',
+            'page',
+            'singer',
+            'dolphin',
+            'pumpkin',
+            'bassoon'
+          ],
+           comments: 'marwan',
+          date: '2012-11-20T05:05:15.232+00:00',
+          })
+      });
+    }
+
+    async function savePostsToCSV() {
+      const response = await fetch('http://server:5050/posts');
+      const posts = await response.json();
+
+      const writer = createObjectCsvWriter({
+        path: 'posts.csv',
+        header: [
+          { id: 'body', title: 'Body' },
+          { id: 'permalink', title: 'Permalink' },
+          { id: 'author', title: 'Author' },
+          { id: 'title', title: 'Title' },
+          { id: 'tags', title: 'Tags' },
+          { id: 'comments', title: 'Comments' }, 
+          { id: 'date', title: 'Date' }
+        ]
+      });
+
+      await writer.writeRecords(posts);
+    }
+
+    (async () => {
+      await createPost();
+      await savePostsToCSV();
+    })();
+  package.json: |
+    {
+      "name": "api-script",
+      "version": "1.0.0",
+      "type": "module",
+      "dependencies": {
+        "node-fetch": "^3.3.2",
+        "csv-writer": "^1.6.0"
+      }
+    }

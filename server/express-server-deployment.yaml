@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+        - name: server
+          image: marwan1408/server1:latest
+          ports:
+            - containerPort: 5050
+          env:
+            - name: ATLAS_URL
+              value: mongodb+srv://admin:admin@dropit.9rswv.mongodb.net/sample_training?retryWrites=true&w=majority&appName=dropit
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+spec:
+  type: NodePort
+  ports:
+    - port: 5050
+  selector:
+    app: server
