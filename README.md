@@ -62,6 +62,12 @@ https://github.com/marwanfursa3/DevOps--Home--Assignment/blob/main/Screenshot%20
 
 ```
 
+![alt text](https://github.com/marwanfursa3/DevOps--Home--Assignment/blob/main/Screenshot%202024-09-24%20at%201.26.34.png)
+
+![alt text](https://github.com/marwanfursa3/DevOps--Home--Assignment/blob/main/Screenshot%202024-09-24%20at%201.27.13.png)
+
+![alt text](https://github.com/marwanfursa3/DevOps--Home--Assignment/blob/main/Screenshot%202024-09-24%20at%201.27.40.png)
+
 ## How To Run job
 
 kubectl apply -f api-interaction-job.yaml
