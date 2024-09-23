@@ -34,6 +34,7 @@ git clone https://github.com/marwanfursa3/DevOps--Home--Assignment.git
 
 Clone the git repo into your local machine.
 
+![alt text]([http://url/to/img.png](https://github.com/marwanfursa3/DevOps--Home--Assignment/blob/main/Screenshot%202024-09-24%20at%201.26.34.png))
 
 
 
