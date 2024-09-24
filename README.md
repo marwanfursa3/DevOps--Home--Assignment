@@ -34,8 +34,6 @@ git clone https://github.com/marwanfursa3/DevOps--Home--Assignment.git
 
 Clone the git repo into your local machine.
 
-![alt text](https://github.com/marwanfursa3/DevOps--Home--Assignment/blob/main/Screenshot%202024-09-24%20at%201.26.34.png)
-
 
 
 1. Start the Express server:
@@ -50,15 +48,6 @@ cd app
 kubectl apply -f app-deployment.yaml
 
 Open https://localhost:3000 on your browser .
-
-![alt text](https://github.com/marwanfursa3/DevOps--Home--Assignment/blob/main/Screenshot%202024-09-24%20at%201.26.34.png)
-
-![alt text](https://github.com/marwanfursa3/DevOps--Home--Assignment/blob/main/Screenshot%202024-09-24%20at%201.27.13.png)
-
-
-https://github.com/marwanfursa3/DevOps--Home--Assignment/blob/main/Screenshot%202024-09-24%20at%201.27.13.png
-
-![alt text](https://github.com/marwanfursa3/DevOps--Home--Assignment/blob/main/Screenshot%202024-09-24%20at%201.27.40.png)
 
 ```
 
