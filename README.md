@@ -50,6 +50,9 @@ kubectl apply -f app-deployment.yaml
 Open https://localhost:3000 on your browser .
 
 ```
+## How To Run job
+
+kubectl apply -f api-interaction-job.yaml
 
 ![alt text](https://github.com/marwanfursa3/DevOps--Home--Assignment/blob/main/Screenshot%202024-09-24%20at%201.26.34.png)
 
@@ -57,6 +60,3 @@ Open https://localhost:3000 on your browser .
 
 ![alt text](https://github.com/marwanfursa3/DevOps--Home--Assignment/blob/main/Screenshot%202024-09-24%20at%201.27.40.png)
 
-## How To Run job
-
-kubectl apply -f api-interaction-job.yaml
