@@ -19,12 +19,20 @@ spec:
             - containerPort: 3000
           env:
           - name: MONGO_INITDB_ROOT_USERNAME
-            value: admin
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: MONGO_INITDB_ROOT_USERNAME
           - name: MONGO_INITDB_ROOT_PASSWORD
-            value: admin
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: MONGO_INITDB_ROOT_PASSWORD
           - name: MONGO_INITDB_DATABASE
-            value: sample_training
-
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: MONGO_INITDB_DATABASE
 ---
 apiVersion: v1
 kind: Service
@@ -37,4 +45,3 @@ spec:
       targetPort: 3000
   selector:
     app: app
-
