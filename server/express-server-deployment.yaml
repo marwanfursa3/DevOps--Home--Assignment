@@ -19,7 +19,10 @@ spec:
             - containerPort: 5050
           env:
             - name: ATLAS_URL
-              value: mongodb+srv://admin:admin@dropit.9rswv.mongodb.net/sample_training?retryWrites=true&w=majority&appName=dropit
+              valueFrom:
+                secretKeyRef:
+                  name: atlas-secret
+                  key: ATLAS_URL
 ---
 apiVersion: v1
 kind: Service
