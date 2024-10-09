@@ -7,17 +7,24 @@ spec:
     spec:
       containers:
       - name: api-interaction
-        image: node:14
-        command: ["sh", "-c", "mkdir -p /tmp/scripts && cp /scripts/* /tmp/scripts && cd /tmp/scripts && npm install && node api-script.js"]
+        image: node:18
+        command: ["sh", "-c", "mkdir -p /tmp/scripts /tmp/output && cp /scripts/* /tmp/scripts && cd /tmp/scripts && npm install && node api-script.js && mv posts.csv /tmp/output"]
         volumeMounts:
         - name: script-volume
-          mountPath: /scripts
+          mountPath: /scripts  # Mounted ConfigMap with the scripts
+        - name: host-volume
+          mountPath: /tmp/output  # Mounted host directory for output
       restartPolicy: Never
       volumes:
       - name: script-volume
         configMap:
           name: api-script-config
+      - name: host-volume
+        hostPath:
+          path: /Users/user/Desktop/githw/DevOps--Home--Assignment  # This is your local path
+          type: Directory    
   backoffLimit: 4
+
 
 ---
 apiVersion: v1
@@ -37,7 +44,7 @@ data:
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          body: `We the People of the United States, in Order to form a more perfect Union...`,
+          body: 'We the People of the United States, in Order to form a more perfect Union...',
           permalink: 'jNsgObovWyKEoXNydtis',
           author: 'marwan',
           title: 'US Constitution',
